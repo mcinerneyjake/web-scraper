@@ -7,7 +7,8 @@ const app = express();
 
 const url = 'https://minnesotaplaylist.com/classified/auditions';
 
-axios(url)
+app.get('/classifieds', (req, res) => {
+  axios(url)
   .then((response) => {
     const html = response.data;
     const $ = cheerio.load(html);
@@ -38,10 +39,11 @@ axios(url)
     //     datesAndLocations,
     //   });
     // });
-    return auditionTitle;
+    res.json(auditionTitle);
   })
   .catch((error) => {
     console.log('Error in scraper axios request:', error);
   });
+});
 
 app.listen(PORT, () => console.log(`server running on PORT ${PORT}`));
