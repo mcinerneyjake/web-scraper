@@ -5,6 +5,10 @@ const express = require('express');
 
 const app = express();
 
+const cors = require('cors');
+
+app.use(cors());
+
 const url = 'https://minnesotaplaylist.com/classified/auditions';
 
 app.get('/classifieds', (req, res) => {
@@ -19,10 +23,10 @@ app.get('/classifieds', (req, res) => {
 
     $('.classified-title', html).each(function() {
       const title = $(this).text();
-      const itemUrl = $(this).find('a').attr('href');
+      const classifiedUrl = $(this).find('a').attr('href');
       auditionTitle.push({
         title,
-        itemUrl,
+        classifiedUrl,
       });
     });
 
